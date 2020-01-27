@@ -9,20 +9,27 @@ def sort_012(input_list):
     if not input_list or len(input_list) <= 0:
         return []
 
-    bucket_0 = []
-    bucket_1 = []
-    bucket_2 = []
+    pointer_0 = 0
+    pointer_2 = len(input_list) - 1
+    i = 0
 
-    for v in input_list:
+    while i <= pointer_2:
+        v = input_list[i]
+
         if v == 0:
-            bucket_0.append(v)
-        elif v == 1:
-            bucket_1.append(v)
-        else:
-            bucket_2.append(v)
+            input_list[i] = input_list[pointer_0]
+            input_list[pointer_0] = 0
+            pointer_0 += 1
+            i += 1
 
-    # TODO: this is also traversing!!!
-    return bucket_0 + bucket_1 + bucket_2
+        elif v == 2:
+            input_list[i] = input_list[pointer_2]
+            input_list[pointer_2] = 2
+            pointer_2 -= 1
+        else:
+            i += 1
+
+    return input_list
 
 
 def assert_equals(expected, actual):
@@ -46,17 +53,17 @@ if __name__ == "__main__":
     )
 
     assert_equals(
-        [0, 0, 0, 0, 1, 1],
+        [0,0,0,0, 1,1],
         sort_012([0, 0, 0, 1, 1, 0])
     )
 
     assert_equals(
-        [1, 1, 2, 2, 2, 2],
+        [1,1, 2,2,2,2],
         sort_012([2, 2, 2, 1, 1, 2])
     )
 
     assert_equals(
-        [0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2],
+        [0,0,0, 1,1,1, 2,2,2,2,2],
         sort_012([0, 0, 2, 2, 2, 1, 1, 1, 2, 0, 2])
     )
 
@@ -66,6 +73,6 @@ if __name__ == "__main__":
     )
 
     assert_equals(
-        [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2],
+        [0,0,0,0,0,0, 1,1,1,1,1,1, 2,2,2,2,2,2,2],
         sort_012([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2])
     )
