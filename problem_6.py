@@ -45,6 +45,11 @@ if __name__ == "__main__":
     )
 
     assert_equals(
+        (-9, 0),
+        get_min_max([-9, -3, -1, -2, 0, -5, -4, -6, -7, -8])
+    )
+
+    assert_equals(
         (5, 5),
         get_min_max([5, 5, 5, 5, 5])
     )
